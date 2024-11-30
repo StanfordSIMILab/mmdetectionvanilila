@@ -205,18 +205,45 @@ dataset_combined = dict(
 #         type='ConcatDataset', datasets=[dataset_511B, dataset_511C, dataset_patient1a])) #, dataset_5171C, dataset_5172D,dataset_5172F]))
 
 
+# train_dataloader = dict(
+#     batch_size=[1,1,1,1,1,1],
+#     num_workers=2,
+#     persistent_workers=True,    
+#     sampler=dict(
+#         type='MultiDataSampler',
+#         dataset_ratio=[1,1,1,1,1,1]),
+#     batch_sampler=dict(
+#         type='MultiDataAspectRatioBatchSampler',
+#         num_datasets=6),
+#     dataset=dict(
+#         type='ConcatDataset', datasets=[dataset_511B,dataset_5172F, dataset_combined, dataset_patient1a, dataset_5171C, dataset_5172D])) #, dataset_5171C, dataset_5172D,dataset_5172F]))
+
 train_dataloader = dict(
-    batch_size=[1,1,1,1,1],
+    batch_size=[1,1,1,1,1,1],
     num_workers=2,
     persistent_workers=True,    
     sampler=dict(
         type='MultiDataSampler',
-        dataset_ratio=[1,1,1,1,1]),
+        dataset_ratio=[1,1,1,1,1,1]),
     batch_sampler=dict(
         type='MultiDataAspectRatioBatchSampler',
-        num_datasets=5),
+        num_datasets=6),
     dataset=dict(
-        type='ConcatDataset', datasets=[dataset_511B, dataset_combined, dataset_patient1a, dataset_5171C, dataset_5172D])) #, dataset_5171C, dataset_5172D,dataset_5172F]))
+        type='ConcatDataset', datasets=[dataset_511B,dataset_5172F, dataset_combined, dataset_patient1a, dataset_5171C, dataset_5172D])) #, dataset_5171C, dataset_5172D,dataset_5172F]))
+
+# train_dataloader = dict(
+#     batch_size=2,
+#     num_workers=2,
+#     dataset=dict(
+#         type=dataset_type,
+#         # explicitly add your class names to the field `metainfo`
+#         metainfo=dict(classes=classes),
+#         data_root='/home/nehal/Data/Neuro/zipfolders/CombinedCoco/',
+#         ann_file='combined_coco.json',
+#         data_prefix=dict(img='combined_images/'),
+#         filter_cfg=dict(filter_empty_gt=True, min_size=32),
+#         pipeline=train_pipeline,
+#         backend_args=backend_args))
 
 val_dataloader = dict(
     batch_size=1,

@@ -51,3 +51,6 @@ CUDA_VISIBLE_DEVICES=0 python demo/image_demo.py /home/nehal/Data/Neuro/Videos/V
 
 # Command to browse dataset 
 python tools/analysis_tools/browse_dataset.py ${CONFIG} [-h] [--skip-type ${SKIP_TYPE[SKIP_TYPE...]}] [--output-dir ${OUTPUT_DIR}] [--not-show] [--show-interval ${SHOW_INTERVAL}]
+
+
+python tools/analysis_tools/browse_dataset.py /home/nehal/code/mmdetection_supervised/mmdetection/configs/mask2former/mask2former_swin-s-p4-w7-224_8xb2-lsj-50e_coco_surgery_new.py --output-dir VIZ --not-show True
