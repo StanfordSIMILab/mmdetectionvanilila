@@ -1,6 +1,6 @@
 _base_ = ['./mask2former_r50_8xb2-lsj-50e_coco-panoptic.py']
 
-num_things_classes = 22
+num_things_classes = 24
 num_stuff_classes = 0
 num_classes = num_things_classes + num_stuff_classes
 # image_size = (1024, 1024)
@@ -104,8 +104,8 @@ test_pipeline = [
 dataset_type = 'CocoDataset'
 classes = ('Cerebellum', 'Arachnoid', 'CN8', 'CN5', 'CN7','CN_9_10_11','SCA','AICA','SuperiorPetrosalVein',
            'Labrynthine','Vein','Brainstem','Suction','Bovie','Bipolar','Forcep','BluntProbe',
-           'Drill','Kerrison','Cottonoid','Scissors','Unknown')
-data_root='/home/nehal/code/mmdetection/data/mvd_surgery/'
+           'Drill','Kerrison','Cottonoid','Scissors','Unknown','Dissector','Teflon')
+data_root='/home/nehal/code/mmdetection_supervised/mmdetection/data/mvd_surgery/'
 
 
 backend_args = None
@@ -156,9 +156,6 @@ dataset_patient1a =dict(
     data_prefix=dict(img='images_patient1a/'),
      pipeline=train_pipeline,
                     backend_args=backend_args)
-    
-
-
 
 dataset_5171C =dict(
     type=dataset_type,
@@ -185,6 +182,15 @@ dataset_5172F = dict(
          pipeline=train_pipeline,
                     backend_args=backend_args)
 
+dataset_combined = dict(
+    type=dataset_type,
+    metainfo=dict(classes=classes),
+    data_root='/home/nehal/Data/Neuro/zipfolders/CombinedCoco/',
+    ann_file='annotations/combined_coco.json',
+    data_prefix=dict(img='combined_images/'),
+         pipeline=train_pipeline,
+                    backend_args=backend_args)
+
 # train_dataloader = dict(
 #     batch_size=[1,1,1],
 #     num_workers=2,
@@ -200,17 +206,17 @@ dataset_5172F = dict(
 
 
 train_dataloader = dict(
-    batch_size=[1,1,1,1,1,1],
+    batch_size=[1,1,1,1,1],
     num_workers=2,
     persistent_workers=True,    
     sampler=dict(
         type='MultiDataSampler',
-        dataset_ratio=[1,1,1,1,1,1]),
+        dataset_ratio=[1,1,1,1,1]),
     batch_sampler=dict(
         type='MultiDataAspectRatioBatchSampler',
-        num_datasets=6),
+        num_datasets=5),
     dataset=dict(
-        type='ConcatDataset', datasets=[dataset_511B, dataset_511C, dataset_patient1a, dataset_5171C, dataset_5172D, dataset_5172F])) #, dataset_5171C, dataset_5172D,dataset_5172F]))
+        type='ConcatDataset', datasets=[dataset_511B, dataset_combined, dataset_patient1a, dataset_5171C, dataset_5172D])) #, dataset_5171C, dataset_5172D,dataset_5172F]))
 
 val_dataloader = dict(
     batch_size=1,
@@ -220,9 +226,9 @@ val_dataloader = dict(
         test_mode=True,
         # explicitly add your class names to the field `metainfo`
         metainfo=dict(classes=classes),
-        data_root=data_root,
-        ann_file='annotations/vid511B_coco.json',
-        data_prefix=dict(img='images_511B/',seg='annotations/'),
+        data_root='/home/nehal/Data/Neuro/zipfolders/CombinedCoco/',
+        ann_file='combined_coco.json',
+        data_prefix=dict(img='combined_images/',seg='annotations/'),
          pipeline=test_pipeline,
         backend_args=backend_args
         )
@@ -232,7 +238,7 @@ test_dataloader = val_dataloader
 
 val_evaluator = dict(
     type='CocoMetric',
-    ann_file=data_root + 'annotations/vid511B_coco.json',
+    ann_file='/home/nehal/Data/Neuro/zipfolders/CombinedCoco/' + 'annotations/combined_coco.json',
     metric= 'segm',
     format_only=False,
     backend_args=backend_args)

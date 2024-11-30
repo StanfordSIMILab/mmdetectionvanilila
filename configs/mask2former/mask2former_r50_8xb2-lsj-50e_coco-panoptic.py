@@ -231,7 +231,7 @@ param_scheduler = dict(
 # Before 365001th iteration, we do evaluation every 5000 iterations.
 # After 365000th iteration, we do evaluation every 368750 iterations,
 # which means that we do evaluation at the end of training.
-interval = 1000
+interval = 3000
 dynamic_intervals = [(max_iters // interval * interval + 1, max_iters)]
 train_cfg = dict(
     type='IterBasedTrainLoop',

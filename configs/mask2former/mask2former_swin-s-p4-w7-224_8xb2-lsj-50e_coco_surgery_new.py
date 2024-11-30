@@ -41,16 +41,16 @@ optim_wrapper = dict(
 
 default_hooks = dict(
     timer=dict(type='IterTimerHook'),
-    logger=dict(type='LoggerHook', interval=2000
+    logger=dict(type='LoggerHook', interval=500
                 ,out_suffix='json'),
     param_scheduler=dict(type='ParamSchedulerHook'),
     checkpoint=dict( type='CheckpointHook',
         by_epoch=False,
         save_best=['coco/segm_mAP'],
         max_keep_ckpts=3,
-        interval=2000),
+        interval=500),
     sampler_seed=dict(type='DistSamplerSeedHook'),
-    visualization=dict(type='DetVisualizationHook',draw=True,interval=2000,show=False))
+    visualization=dict(type='DetVisualizationHook',draw=True,interval=500,show=False))
 
 # https://mmengine.readthedocs.io/en/latest/api/visualization.html
 # _base_.visualizer.vis_backends = [
