@@ -1,0 +1,3 @@
+[submodule "mmdetection/mmdetection"]
+	path = mmdetection/mmdetection
+	url = https://github.com/StanfordSIMILab/mmdetection_supervised.git

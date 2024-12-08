@@ -453,3 +453,7 @@ This project is released under the [Apache 2.0 license](LICENSE).
 - [MIM](https://github.com/open-mmlab/mim): MIM installs OpenMMLab packages.
 - [MMEval](https://github.com/open-mmlab/mmeval): A unified evaluation library for multiple machine learning libraries.
 - [Playground](https://github.com/open-mmlab/playground): A central hub for gathering and showcasing amazing projects built upon OpenMMLab.
+<<<<<<< HEAD
+=======
+# mmdetection_supervised
+>>>>>>> 3cb0bf1f27eef3d395861598720ea777ec8a7a02

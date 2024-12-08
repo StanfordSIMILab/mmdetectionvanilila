@@ -1,7 +1,20 @@
+<<<<<<< HEAD
 _base_ = [
     '../_base_/datasets/coco_panoptic.py', '../_base_/default_runtime.py'
 ]
 image_size = (1024, 1024)
+=======
+# _base_ = [
+#     '../_base_/datasets/coco_panoptic.py', '../_base_/default_runtime.py'
+# ]
+
+_base_ = [ '../_base_/default_runtime.py'
+]
+backend_args = None
+
+
+image_size = (1920, 1080)
+>>>>>>> 3cb0bf1f27eef3d395861598720ea777ec8a7a02
 batch_augments = [
     dict(
         type='BatchFixedSizePad',
@@ -148,6 +161,7 @@ model = dict(
     init_cfg=None)
 
 # dataset settings
+<<<<<<< HEAD
 data_root = 'data/coco/'
 train_pipeline = [
     dict(
@@ -191,6 +205,51 @@ val_evaluator = [
         backend_args={{_base_.backend_args}})
 ]
 test_evaluator = val_evaluator
+=======
+# data_root = 'data/coco/'
+# train_pipeline = [
+#     dict(
+#         type='LoadImageFromFile',
+#         to_float32=True,
+#         backend_args={{_base_.backend_args}}),
+#     dict(
+#         type='LoadPanopticAnnotations',
+#         with_bbox=True,
+#         with_mask=True,
+#         with_seg=True,
+#         backend_args={{_base_.backend_args}}),
+#     dict(type='RandomFlip', prob=0.5),
+#     # large scale jittering
+#     dict(
+#         type='RandomResize',
+#         scale=image_size,
+#         ratio_range=(0.1, 2.0),
+#         keep_ratio=True),
+#     dict(
+#         type='RandomCrop',
+#         crop_size=image_size,
+#         crop_type='absolute',
+#         recompute_bbox=True,
+#         allow_negative_crop=True),
+#     dict(type='PackDetInputs')
+# ]
+
+# train_dataloader = dict(dataset=dict(pipeline=train_pipeline))
+
+# val_evaluator = [
+#     dict(
+#         type='CocoPanopticMetric',
+#         ann_file=data_root + 'annotations/panoptic_val2017.json',
+#         seg_prefix=data_root + 'annotations/panoptic_val2017/',
+#         backend_args={{_base_.backend_args}}),
+#     dict(
+#         type='CocoMetric',
+#         ann_file=data_root + 'annotations/instances_val2017.json',
+#         metric=['bbox', 'segm'],
+#         backend_args={{_base_.backend_args}})
+# ]
+# test_evaluator = val_evaluator
+>>>>>>> 3cb0bf1f27eef3d395861598720ea777ec8a7a02
 
 # optimizer
 embed_multi = dict(lr_mult=1.0, decay_mult=0.0)
@@ -225,7 +284,11 @@ param_scheduler = dict(
 # Before 365001th iteration, we do evaluation every 5000 iterations.
 # After 365000th iteration, we do evaluation every 368750 iterations,
 # which means that we do evaluation at the end of training.
+<<<<<<< HEAD
 interval = 5000
+=======
+interval = 3000
+>>>>>>> 3cb0bf1f27eef3d395861598720ea777ec8a7a02
 dynamic_intervals = [(max_iters // interval * interval + 1, max_iters)]
 train_cfg = dict(
     type='IterBasedTrainLoop',
@@ -235,6 +298,7 @@ train_cfg = dict(
 val_cfg = dict(type='ValLoop')
 test_cfg = dict(type='TestLoop')
 
+<<<<<<< HEAD
 default_hooks = dict(
     checkpoint=dict(
         type='CheckpointHook',
@@ -242,6 +306,15 @@ default_hooks = dict(
         save_last=True,
         max_keep_ckpts=3,
         interval=interval))
+=======
+# default_hooks = dict(
+#     checkpoint=dict(
+#         type='CheckpointHook',
+#         by_epoch=False,
+#         save_best=True,
+#         max_keep_ckpts=3,
+#         interval=interval))
+>>>>>>> 3cb0bf1f27eef3d395861598720ea777ec8a7a02
 log_processor = dict(type='LogProcessor', window_size=50, by_epoch=False)
 
 # Default setting for scaling LR automatically

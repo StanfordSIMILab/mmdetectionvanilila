@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+=======
+outputs*/
+TEST/
+*.mp4
+trainsurgery*/
+work_dirs/
+data/
+
+
+
+>>>>>>> 3cb0bf1f27eef3d395861598720ea777ec8a7a02
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -103,8 +115,12 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+<<<<<<< HEAD
 data/
 data
+=======
+# 
+>>>>>>> 3cb0bf1f27eef3d395861598720ea777ec8a7a02
 .vscode
 .idea
 .DS_Store
@@ -115,7 +131,11 @@ data
 *.log.json
 docs/modelzoo_statistics.md
 mmdet/.mim
+<<<<<<< HEAD
 work_dirs/
+=======
+.work_dirs/
+>>>>>>> 3cb0bf1f27eef3d395861598720ea777ec8a7a02
 
 # Pytorch
 *.pth
